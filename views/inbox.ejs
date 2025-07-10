@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+
+  <h2>Inbox</h2>
+
+  <ul class="chat-list">
+    <% conversations.forEach(c=> { %>
+      <li>
+        <a href="/chat/<%= c.user._id %>">
+          <strong>
+            <%= c.user.username %>
+          </strong><br>
+          <small>
+            <%= c.lastMessage.text %>
+          </small>
+        </a>
+      </li>
+      <% }) %>
+  </ul>
+
+  <%- include('partials/footer') %>

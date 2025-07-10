@@ -1,0 +1,34 @@
+<%- include('partials/header') %>
+
+  <h2 style="text-align:center;">Chat with <%= receiver.username %>
+  </h2>
+
+  <!-- Hidden IDs for sockets -->
+  <input type="hidden" id="myId" value="<%= currentUser %>">
+  <input type="hidden" id="receiverId" value="<%= receiver._id %>">
+
+  <div class="chat-box">
+    <% messages.forEach(msg=> { %>
+      <div class="<%= msg.sender._id.toString() === currentUser ? 'msg-me' : 'msg-them' %>">
+        <strong>
+          <%= msg.sender.username %>:
+        </strong>
+        <p>
+          <%= msg.text %>
+        </p>
+      </div>
+      <% }) %>
+  </div>
+
+  <p id="typing" style="text-align:center; font-size:12px; color:#bbb;"></p>
+
+  <form id="chatForm" action="/chat/<%= receiver._id %>" method="POST">
+    <input type="text" id="messageInput" name="text" placeholder="Type your message..." autocomplete="off" required>
+    <button type="submit">Send</button>
+  </form>
+
+  <%- include('partials/footer') %>
+
+    <!-- Socket.io & Custom JS -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/socket.js"></script>

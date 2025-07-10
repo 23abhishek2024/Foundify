@@ -1,0 +1,46 @@
+<%- include('partials/header') %>
+  <h2>
+    <%= user.username %>'s Profile
+  </h2>
+  <p style="text-align:center;color:white;">Email: <%= user.email %>
+  </p>
+
+  <h3>Your Lost Items</h3>
+  <ul>
+    <% lostItems.forEach(item=> { %>
+      <li>
+        <h3>
+          <%= item.itemName %>
+        </h3>
+        <p>
+          <%= item.description %>
+        </p>
+        <p>Location: <%= item.location %>
+        </p>
+        <% if (item.photoUrl) { %>
+          <img src="<%= item.photoUrl %>" width="200">
+          <% } %>
+      </li>
+      <% }) %>
+  </ul>
+
+  <h3>Your Found Items</h3>
+  <ul>
+    <% foundItems.forEach(item=> { %>
+      <li>
+        <h3>
+          <%= item.itemName %>
+        </h3>
+        <p>
+          <%= item.description %>
+        </p>
+        <p>Location: <%= item.location %>
+        </p>
+        <% if (item.photoUrl) { %>
+          <img src="<%= item.photoUrl %>" width="200">
+          <% } %>
+      </li>
+      <% }) %>
+  </ul>
+
+  <%- include('partials/footer') %>

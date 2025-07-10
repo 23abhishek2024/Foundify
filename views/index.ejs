@@ -1,0 +1,48 @@
+<%- include('partials/header') %>
+
+  <div class="hero-section">
+    <h1>Welcome to Lost & Found IIT BHU</h1>
+    <p>Report, track and recover lost or found items easily!</p>
+    <div class="btn-group">
+      <a href="/report-lost" class="btn">Report Lost Item</a>
+      <a href="/report-found" class="btn">Report Found Item</a>
+      <% if(currentUser){ %>
+        <a href="/user/<%= currentUser %>" class="btn">My Profile</a>
+        <% } else { %>
+          <a href="/login" class="btn">Login</a>
+          <% } %>
+    </div>
+  </div>
+
+  <form action="/search" method="GET" style="text-align:center; margin-top: 20px;">
+    <input type="text" name="q" placeholder="Search lost items..."
+      style="padding:10px 14px; border-radius:8px; border:1px solid #ccc; width: 250px;">
+    <button type="submit" class="btn-sm">Search</button>
+  </form>
+
+  <section class="recent-section">
+    <h2>Recent Lost & Found</h2>
+
+    <% if (items.length===0) { %>
+      <p style="text-align:center; margin-top:20px;">No items found.</p>
+      <% } else { %>
+        <div class="cards-container">
+          <% items.forEach(item=> { %>
+            <div class="card">
+              <img src="<%= item.photoUrl %>" alt="Item Image">
+              <h3>
+                <%= item.itemName %>
+              </h3>
+              <p>
+                <%= item.description %>
+              </p>
+              <a href="/user/<%= item.user %>" class="btn-sm">View Owner</a>
+              <a href="/chat/<%= item.user %>" class="btn-sm">Chat</a>
+            </div>
+            <% }) %>
+        </div>
+        <% } %>
+
+  </section>
+
+  <%- include('partials/footer') %>

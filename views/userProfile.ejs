@@ -1,0 +1,82 @@
+<%- include('partials/header') %>
+  <div class="profile-card">
+    <h2>
+      <%= user.username %>'s Profile
+    </h2>
+    <p>Email: <%= user.email %>
+    </p>
+
+    <h3>Lost Items</h3>
+    <ul>
+      <% lostItems.forEach(item=> { %>
+        <li>
+          <h4>
+            <%= item.itemName %>
+          </h4>
+          <p>
+            <%= item.description %>
+              <!-- Show comments -->
+              <% if (item._id) { %>
+                <div class="comments-box">
+                  <% comments.filter(c=> c.itemId.toString() === item._id.toString()).forEach(c => { %>
+                    <p><strong>
+                        <%= c.user.username %>:
+                      </strong>
+                      <%= c.text %>
+                    </p>
+                    <% }) %>
+                </div>
+
+                <!-- Comment form -->
+                <form action="/comment/<%= item.__t === 'LostItem' ? 'lost' : 'found' %>/<%= item._id %>" method="POST">
+                  <input type="hidden" name="ownerId" value="<%= user._id %>">
+                  <input type="text" name="text" placeholder="Write a comment..." required>
+                  <button type="submit" class="btn-sm">Comment</button>
+                </form>
+                <% } %>
+
+          </p>
+          <% if (currentUser !==user._id.toString()) { %>
+            <a href="/chat/<%= user._id %>" class="btn">Chat Owner</a>
+            <% } %>
+
+        </li>
+        <% }) %>
+    </ul>
+
+    <h3>Found Items</h3>
+    <ul>
+      <% foundItems.forEach(item=> { %>
+        <li>
+          <h4>
+            <%= item.itemName %>
+          </h4>
+          <p>
+            <%= item.description %>
+              <!-- Show comments -->
+              <% if (item._id) { %>
+                <div class="comments-box">
+                  <% comments.filter(c=> c.itemId.toString() === item._id.toString()).forEach(c => { %>
+                    <p><strong>
+                        <%= c.user.username %>:
+                      </strong>
+                      <%= c.text %>
+                    </p>
+                    <% }) %>
+                </div>
+
+                <!-- Comment form -->
+                <form action="/comment/<%= item.__t === 'LostItem' ? 'lost' : 'found' %>/<%= item._id %>" method="POST">
+                  <input type="hidden" name="ownerId" value="<%= user._id %>">
+                  <input type="text" name="text" placeholder="Write a comment..." required>
+                  <button type="submit" class="btn-sm">Comment</button>
+                </form>
+                <% } %>
+
+          </p>
+          <a href="/chat/<%= user._id %>" class="btn">Chat Owner</a>
+        </li>
+        <% }) %>
+    </ul>
+  </div>
+  <%- include('partials/footer') %>
