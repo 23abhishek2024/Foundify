@@ -1,55 +1,33 @@
-# 🧭 Foundify – Lost & Found Web App
+# 📦 Foundify - Lost & Found Web App
 
-Foundify is a full-stack Lost & Found platform built for campus communities. It enables users to report, claim, and manage lost & found items within an institute, with real-time chat, notifications, and personal dashboards.
+## 📊 Project Architecture Diagram
 
----
+```mermaid
+graph TD
+  A[User] -->|Accesses via Browser| B[Foundify Web App]
+  B -->|Sends Request| C[Express.js Server]
 
-## 📌 Tech Stack
+  C -->|Renders Views| D[EJS Templates]
+  C -->|CRUD API Calls| E[MongoDB Database]
+  C -->|Real-time Messages| F[Socket.io Server]
 
-- **Node.js**
-- **Express.js**
-- **MongoDB** (with Mongoose)
-- **EJS** (Embedded JavaScript templates)
-- **Socket.io**
-- **HTML, CSS, JavaScript**
+  F -->|Chat & Notifications| A
 
----
+  E -->|Stores| G[User Data]
+  E -->|Stores| H[Lost & Found Items]
+  E -->|Stores| I[Messages & Notifications]
 
-## 🚀 Features
+  B -->|Static Files| J[Public (HTML, CSS, JS)]
 
-- 📋 User Registration & Authentication
-- 📦 Report Lost & Found Items with Image Upload
-- 👤 Personal User Profiles and Dashboards
-- 📨 Real-time Chat System using Socket.io
-- 📬 Notifications and Inbox System
-- 📊 Admin Approval System for Posted Items
-- 📌 RESTful APIs for Items, Users, Chat & Notifications
-- 📱 Responsive Frontend with EJS Dynamic Rendering
+  subgraph 📦 Routes
+    C1[/items.js/]
+    C2[/user.js/]
+    C3[/chat.js/]
+    C4[/notification.js/]
+  end
 
----
-
-## 📖 Backend & DSA Concepts Used
-
-- ✅ **REST API Design:** Clean, modular APIs for all CRUD operations.
-- ✅ **Sessions & JWT:** Secure user authentication and session handling.
-- ✅ **Event-based Programming:** Real-time communication via Socket.io.
-- ✅ **MongoDB Query Optimization:** Efficient queries using Mongoose.
-- ✅ **Routing & Middleware Pattern:** Clean separation of concerns in Express.js.
-- ✅ **MVC Structure:** Maintained separation between routes, models, and views.
-
----
-
-## 📷 Screenshots
-
-> ⚡ Add screenshots of the web pages (like login, dashboard, report item, chat)
-
----
-
-## 💻 Installation & Setup
-
-Clone the repository:
-
-```bash
-git clone https://github.com/23abhishek2024/Foundify.git
-cd Foundify
+  C --> C1
+  C --> C2
+  C --> C3
+  C --> C4
 ```
