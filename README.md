@@ -1,6 +1,10 @@
 # 📦 Foundify - Lost & Found Web App
 
-## 📊 Project Architecture Diagram
+A full-stack Lost & Found web application built using **Node.js, Express.js, MongoDB, EJS** that enables users to report, search, and track lost or found items within the IIT BHU campus community.
+
+---
+
+## 📊 Architecture Diagram
 
 ```mermaid
 graph TD
